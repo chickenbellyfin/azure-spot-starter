@@ -5,12 +5,16 @@ A service which keeps azure spot instances running.
 - First, copy template_config.yaml to data/config.yaml. All configuration/secrets will go in config.yaml.
 
 ```
+$ docker pull chickenbellyfin/azure-spot-starter
+
+# OR
+
 $ docker build . -t azure-spot-starter
 ```
 
 ## Run
 ```
-$ docker run -v $(pwd)/data:/data azure-spot-starter
+$ docker run -v $(pwd)/data:/data chickenbellyfin/azure-spot-starter
 ```
 
 ### Create Azure Service Principal
