@@ -1,0 +1,12 @@
+# copy to config.yaml
+az_tenant_id: '...'
+az_client_id: '...'
+az_client_secret: '...'
+az_subscription_id: '...'
+
+interval_secs: 300
+vms:
+  - az_resource_group: az-resource-group
+    az_vm: az-vm-name
+  - az_resource_group: az-resource-group-2
+    az_vm: az-vm-name-2
