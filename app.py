@@ -8,7 +8,7 @@ from azure.identity import ClientSecretCredential
 from azure.mgmt.compute import ComputeManagementClient
 
 data_dir = ''
-if len(sys.argv) > 0:
+if len(sys.argv) > 1:
   data_dir = sys.argv[1]
   print(f'Using data dir {data_dir}')
 
