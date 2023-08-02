@@ -2,7 +2,7 @@
 A service which keeps azure spot instances running.
 
 ## Setup
-- First, copy template_config.yaml to data/config.yaml. All configuration/secrets will go in config.yaml.
+- First, copy template_config.yaml to config.yaml. All configuration/secrets will go in config.yaml.
 
 ```
 $ docker pull chickenbellyfin/azure-spot-starter
@@ -10,6 +10,19 @@ $ docker pull chickenbellyfin/azure-spot-starter
 # OR
 
 $ docker build . -t azure-spot-starter
+```
+
+### docker-compose
+```
+version: '3.8'
+
+services:
+  azure-spot-starter:
+    image: chickenbellyfin/azure-spot-starter
+    container_name: azure-spot-starter
+    volumes:
+      - './azure-spot-starter.yaml:/app/config.yaml'
+    restart: unless-stopped
 ```
 
 ## Run

@@ -1,4 +1,4 @@
 config.yaml
-app.log
+*.log
 *.service
 data/

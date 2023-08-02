@@ -7,22 +7,28 @@ import yaml
 from azure.identity import ClientSecretCredential
 from azure.mgmt.compute import ComputeManagementClient
 
-data_dir = ''
-if len(sys.argv) > 1:
-  data_dir = sys.argv[1]
-  print(f'Using data dir {data_dir}')
+log_dir = ''
+config_file_path = 'config.yaml'
+
+if os.getenv('APP_LOG_DIR'):
+  log_dir = os.environ['APP_LOG_DIR']
+  os.makedirs(log_dir, exist_ok=True)
 
 logging.basicConfig(
   level=logging.INFO,
   format='%(asctime)s :: %(levelname)s :: %(name)s :: %(message)s',
   handlers=[
-    logging.FileHandler(os.path.join(data_dir, 'app.log')),
+    logging.FileHandler(os.path.join(log_dir, 'azure-spot-starter.log')),
     logging.StreamHandler()
   ]
 )
 logging.getLogger('azure').setLevel(logging.ERROR)
 
-with open(os.path.join(data_dir, 'config.yaml')) as config_file:
+if not os.path.exists(config_file_path):
+  logging.error(f'config file does not exist: {os.path.abspath(config_file_path)}')
+  exit(1)
+
+with open(os.path.join(config_file_path)) as config_file:
   config = yaml.safe_load(config_file)
 
 az_tenant_id = config['az_tenant_id']
